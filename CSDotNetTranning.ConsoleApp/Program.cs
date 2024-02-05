@@ -11,8 +11,6 @@ var sqlConnectionStringBuilder = new SqlConnectionStringBuilder()
     UserID = "sa",
     Password = "admin",
 };
-//var constring = "Data Source=(local)\\SQLEXPRESS;Initial Catalog=eLoadPortal;Connect Timeout=120;Min Pool Size=5;Integrated Security=False;user id=sa;password=admin";
-//Console.WriteLine(constring);
 var query = "SELECT * FROM tbl_Blog";
 Console.WriteLine(sqlConnectionStringBuilder.ConnectionString);
 var sqlConnection = new SqlConnection(sqlConnectionStringBuilder.ConnectionString);
