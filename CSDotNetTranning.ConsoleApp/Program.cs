@@ -2,6 +2,7 @@
 using CSDotNetTranning.ConsoleApp.AdoDotNetExamples;
 using CSDotNetTranning.ConsoleApp.DapperExamples;
 using CSDotNetTranning.ConsoleApp.EFCoreExamples;
+using CSDotNetTranning.ConsoleApp.HttpClientExamples;
 
 //var adoDotNet = new AdoDotNetExample();
 //adoDotNet.Edit(11);
@@ -18,4 +19,8 @@ using CSDotNetTranning.ConsoleApp.EFCoreExamples;
 //efCore.Read();
 //efCore.Edit(9);
 //efCore.Delete(9);
+Console.WriteLine("Press enter when API fully loaded!");
+Console.ReadKey();
+var httpclientExample = new HttpClientExamples();
+await httpclientExample.Run();
 Console.ReadKey();
