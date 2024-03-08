@@ -1,0 +1,36 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model List<BlogModel>
+@{
+    ViewData["Title"] = "Blog Page";
+    int count = 0;
+}
+<h4>Blogs</h4>
+<a href="/Blog/Create" class="btn btn-outline-success">New</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Title</th>
+            <th scope="col">Author</th>
+            <th scope="col">Content</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var blog in this.Model)
+        {
+            <tr>
+                <th scope="row">@(++count)</th>
+                <td>@blog.BlogTitle</td>
+                <td>@blog.BlogAuthor</td>
+                <td>@blog.BlogContent</td>
+                <td>
+                    <a href="/Blog/Edit/@blog.BlogID" class="btn btn-warning">Edit</a>
+                    <a href="/Blog/Delete/@blog.BlogID" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

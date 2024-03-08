@@ -22,6 +22,8 @@ const readBlog = () => {
         `
     });
     $('#tbDataTable').html(htmlRow);
+
+    new DataTable('#datatable');
 }
 
 const getBlogs = () => {
@@ -40,6 +42,7 @@ const runBlog = () => {
 runBlog();
 
 const createBlog = (title, author, content) => {
+
     let lstBlog = getBlogs();
 
     const blog = {
@@ -52,6 +55,7 @@ const createBlog = (title, author, content) => {
     lstBlog.push(blog);
 
     setLocalStorage(lstBlog);
+
 }
 const editBlog = (id) => {
     let lstBlog = getBlogs();
@@ -86,25 +90,34 @@ const updateBlog = (id, title, author, content) => {
         Content: content
     }
     setLocalStorage(lstBlog);
+
 }
 
 const deleteBlog = (id) => {
-    let result = confirm('Are you sure want to delete?');
-    if (!result) return;
+    Notiflix.Confirm.show(
+        'Confirm',
+        'Are you sure you want to delete?',
+        'Yes',
+        'No',
+        () => {
+            let lstBlog = getBlogs();
+            let lst = lstBlog.filter(x => x.Id === id);
+            if (lst.length === 0) {
+                console.log('No data found.');
+                return;
+            }
 
-    let lstBlog = getBlogs();
+            lstBlog = lstBlog.filter(x => x.Id !== id);
 
-    let lst = lstBlog.filter(x => x.Id === id); // array
-    if (lst.length === 0) {
-        console.log('No data found.');
-        return;
-    }
+            setLocalStorage(lstBlog);
+            successMessage("Delete Success")
+            readBlog();
+        },
+        () => { },
+        {
+        },
+    );
 
-    lstBlog = lstBlog.filter(x => x.Id !== id);
-
-    setLocalStorage(lstBlog);
-
-    readBlog();
 }
 
 const uuidv4 = () => {
@@ -123,13 +136,21 @@ $('#btnSave').click(() => {
     const content = $('#Content').val();
 
     if (_blogId === '') {
-        createBlog(title, author, content);
-        alert('Saving Successful.');
+        Notiflix.Loading.circle();
+        setTimeout(() => {
+            createBlog(title, author, content);
+            Notiflix.Loading.remove();
+            successMessage("Save Success")
+        }, 2000)
     }
     else {
-        updateBlog(_blogId, title, author, content);
-        alert('Updating Successful.');
-        _blogId = '';
+        Notiflix.Loading.circle();
+        setTimeout(() => {
+            updateBlog(_blogId, title, author, content);
+            Notiflix.Loading.remove();
+            successMessage("Update Success");
+            _blogId = '';
+        }, 2000);
     }
 
     $('#Title').val('');
@@ -140,3 +161,6 @@ $('#btnSave').click(() => {
 
     readBlog();
 })
+const successMessage = (message) => {
+    Notiflix.Notify.success(message);
+}
