@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MissingHistoricalRecords.WebApi.Models;
+using System.Data;
 using System.Data.SqlClient;
 
 namespace MissingHistoricalRecords.WebApi
@@ -7,9 +8,10 @@ namespace MissingHistoricalRecords.WebApi
 
     public class AppDbContext : DbContext
     {
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        private readonly string _sqlConnectionString;
+        public AppDbContext()
         {
-            var sqlConnectionStringBuilder = new SqlConnectionStringBuilder()
+            var builder = new SqlConnectionStringBuilder()
             {
                 DataSource = "(local)\\SQLEXPRESS",
                 InitialCatalog = "Db_DotNetTranning",
@@ -17,8 +19,14 @@ namespace MissingHistoricalRecords.WebApi
                 Password = "admin",
                 TrustServerCertificate = true,
             };
-            optionsBuilder.UseSqlServer(sqlConnectionStringBuilder.ConnectionString);
+            _sqlConnectionString = builder.ConnectionString;
         }
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer(_sqlConnectionString);
+
+        }
+        public IDbConnection CreateConnection() => new SqlConnection(_sqlConnectionString);
         public DbSet<BookModel> Books { get; set; }
     }
 
