@@ -56,13 +56,13 @@ namespace MissingHistoricalRecords.WebApi.Repository
                 .GetProperties()
                 .Where(prop => prop.Name != nameof(editModel.BookId));
             var parameter = new DynamicParameters();
-            parameter.Add($"@{nameof(bookIdName)}", id);
+            parameter.Add($"@{bookIdName}", id);
             foreach (var property in properties)
             {
                 parameter.Add($"@{property.Name}", property.GetValue(editModel));
             }
             string values = string.Join(", ", properties.Select(p => $"{p.Name}=@{p.Name}"));
-            string sql = @$"UPDATE SET {values} WHERE {bookIdName}=@{bookIdName}";
+            string sql = @$"UPDATE tbl_Book SET {values} WHERE {bookIdName}=@{bookIdName}";
             using var connection = _dbContext.CreateConnection();
             connection.Open();
             using var trx = connection.BeginTransaction();

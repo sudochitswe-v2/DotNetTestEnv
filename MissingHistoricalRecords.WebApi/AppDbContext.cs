@@ -27,6 +27,7 @@ namespace MissingHistoricalRecords.WebApi
 
         }
         public IDbConnection CreateConnection() => new SqlConnection(_sqlConnectionString);
+        public SqlConnection CreateSqlConnection()=>new SqlConnection(_sqlConnectionString);
         public DbSet<BookModel> Books { get; set; }
     }
 

@@ -9,6 +9,7 @@ builder.Services.AddControllers();
 builder.Services.AddSingleton<AppDbContext>();
 builder.Services.AddScoped<EfCoreRepository>();
 builder.Services.AddScoped<DapperRepository>();
+builder.Services.AddScoped<AdoNetRepository>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
