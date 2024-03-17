@@ -61,5 +61,42 @@ namespace MissingHistoricalRecords.WebApi.Controllers
             var msg = result > 0 ? "Delete success" : "Delete fail";
             return Ok(msg);
         }
+        [HttpGet("books/{id}/contents")]
+        public ActionResult<IEnumerable<ContentModel>> GetBookContents(int id, int? pageNo)
+        {
+            var contents = _adoNet.GetBookContents(id, pageNo);
+            return Ok(contents);
+        }
+        [HttpPost("books/{id}/contents")]
+        public IActionResult CreateBookContent(ContentModel createModel)
+        {
+            var result = _adoNet.CreateContent(createModel);
+            var msg = result > 0 ? "Create success" : "Create fail";
+            return Ok(msg);
+        }
+        [HttpPut("books/{id}/contents/{contentId}")]
+        public IActionResult UpdateBookContent(int contentId, ContentModel updateModel)
+        {
+            var content = _adoNet.GetCotent(contentId);
+            if (content is null)
+            {
+                return NotFound("No record found.");
+            }
+            var result = _adoNet.UpdateContent(contentId, updateModel);
+            var msg = result > 0 ? "Update success" : "Update fail";
+            return Ok(msg);
+        }
+        [HttpDelete("books/{id}/contents/{contentId}")]
+        public IActionResult DeleteBookContent(int contentId)
+        {
+            var content = _adoNet.GetCotent(contentId);
+            if (content is null)
+            {
+                return NotFound("No record found.");
+            }
+            var result = _adoNet.DeleteContent(content);
+            var msg = result > 0 ? "Update success" : "Update fail";
+            return Ok(msg);
+        }
     }
 }

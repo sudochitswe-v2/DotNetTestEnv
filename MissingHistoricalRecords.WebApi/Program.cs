@@ -1,4 +1,5 @@
 using MissingHistoricalRecords.WebApi;
+using MissingHistoricalRecords.WebApi.Middleware;
 using MissingHistoricalRecords.WebApi.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +11,7 @@ builder.Services.AddSingleton<AppDbContext>();
 builder.Services.AddScoped<EfCoreRepository>();
 builder.Services.AddScoped<DapperRepository>();
 builder.Services.AddScoped<AdoNetRepository>();
+builder.Services.AddTransient<GlobalExceptionMiddleware>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -26,6 +28,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.UseMiddleware<GlobalExceptionMiddleware>();
 
 app.MapControllers();
 

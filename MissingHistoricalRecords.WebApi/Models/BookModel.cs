@@ -8,11 +8,11 @@ namespace MissingHistoricalRecords.WebApi.Models
     {
         [Key]
         public int? BookId { get; set; }
-        public string BookTitle { get; set; }
-        public string BookAuthor { get; set; }
-        public string BookCover { get; set; }
-        public string BookCategory { get; set; }
-        public string BookDescription { get; set; }
+        public string BookTitle { get; set; } = null!;
+        public string BookAuthor { get; set; } = null!;
+        public string BookCover { get; set; } = null!;
+        public string BookCategory { get; set; } = null!;
+        public string BookDescription { get; set; } = null!;
 
     }
 }
