@@ -1,0 +1,41 @@
+﻿@using Newtonsoft.Json
+@model ApexChartPieChartResponseModel
+<div id="chart"></div>
+@{
+    var _series = Model.Series;
+    var _lables = Model.Lables;
+    // List<int> _series = new List<int> { 44, 55, 13, 43, 22 };
+    //List<string> _lables = new List<string> { "Team A", "Team B", "Team C", "Team D", "Team E" };
+}
+@section scripts {
+    <script>
+
+        let _series = @Html.Raw(JsonConvert.SerializeObject(_series));
+        let _lables = @Html.Raw(JsonConvert.SerializeObject(_lables));
+
+        var options = {
+            series: _series,
+            chart: {
+                width: 380,
+                type: 'pie',
+            },
+            labels: _lables,
+            responsive: [{
+                breakpoint: 480,
+                options: {
+                    chart: {
+                        width: 200
+                    },
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }]
+        };
+
+        var chart = new ApexCharts(document.querySelector("#chart"), options);
+        chart.render();
+
+
+    </script>
+}
