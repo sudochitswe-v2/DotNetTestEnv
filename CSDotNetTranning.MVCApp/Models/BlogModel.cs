@@ -13,4 +13,8 @@ namespace CSDotNetTranning.MVCApp.Models
         public string? BlogAuthor { get; set; }
         public string? BlogContent { get; set; }
     }
+    public record BlogMessageResponseModel(
+           bool IsSuccess,
+           string Message
+        );
 }

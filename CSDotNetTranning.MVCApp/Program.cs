@@ -3,7 +3,10 @@ using CSDotNetTranning.MVCApp;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews().AddJsonOptions(opt =>
+{
+    opt.JsonSerializerOptions.PropertyNamingPolicy = null;
+});
 builder.Services.AddSingleton<AppDbContext>();
 var app = builder.Build();
 // Configure the HTTP request pipeline.
