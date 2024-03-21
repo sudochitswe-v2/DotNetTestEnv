@@ -1,4 +1,5 @@
-﻿using CSDotNetTranning.WebApi.EFCoreExamples;
+﻿using CSDotNetTraining.WebApi.Models;
+using CSDotNetTranning.WebApi.EFCoreExamples;
 using CSDotNetTranning.WebApi.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
@@ -15,11 +16,33 @@ namespace CSDotNetTraining.WebApi.Controllers
         {
             _db = new AppDbContext();
         }
+        //[HttpGet("blogs")]
+        //public IActionResult GetBlogs()
+        //{
+        //    var result = _db.Blogs.OrderByDescending(blog => blog.BlogID);
+        //    return Ok(result);
+        //}
         [HttpGet("blogs")]
-        public IActionResult GetBlogs()
+        public IActionResult GetBlogs(int pageNo, int pageSize)
         {
-            var result = _db.Blogs.OrderByDescending(blog => blog.BlogID);
-            return Ok(result);
+
+            var list = _db.Blogs
+                .OrderBy(blog => blog.BlogID)
+                //.OrderByDescending(blog => blog.BlogID)
+                .Skip((pageNo - 1) * pageSize)
+                .Take(pageSize).ToArray();
+            int totalRow = _db.Blogs.Count();
+            int pageCount = totalRow / pageSize;
+            if (totalRow % pageSize > 0)
+                pageCount++;
+            var res = new ResponseModel<BlogModel>
+            {
+                PageCount = pageCount,
+                PageNo = pageNo,
+                PageSize = pageSize,
+                Data = list,
+            };
+            return Ok(res);
         }
         [HttpPost("blogs")]
         public IActionResult CreateBlog(BlogModel blog)
@@ -33,7 +56,7 @@ namespace CSDotNetTraining.WebApi.Controllers
         public IActionResult UpdateBlog(int id, BlogModel blog)
         {
             var editModel = _db.Blogs.FirstOrDefault(blog => blog.BlogID == id);
-            if(editModel is null)
+            if (editModel is null)
             {
                 return NotFound("No data found");
             }
@@ -48,7 +71,7 @@ namespace CSDotNetTraining.WebApi.Controllers
         public IActionResult GetBlog(int id)
         {
             var result = _db.Blogs.FirstOrDefault(blog => blog.BlogID == id);
-            if(result is null)
+            if (result is null)
             {
                 return NotFound("No data found");
             }
@@ -58,7 +81,7 @@ namespace CSDotNetTraining.WebApi.Controllers
         public IActionResult DeleteBlog(int id)
         {
             var deleteModel = _db.Blogs.FirstOrDefault(blog => blog.BlogID == id);
-            if(deleteModel is null)
+            if (deleteModel is null)
             {
                 return NotFound("No data found");
             }

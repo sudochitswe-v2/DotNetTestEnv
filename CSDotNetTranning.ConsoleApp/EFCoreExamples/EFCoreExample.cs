@@ -84,5 +84,12 @@ namespace CSDotNetTranning.ConsoleApp.EFCoreExamples
 
             Console.WriteLine(message);
         }
+        public void BulkCreate(int length)
+        {
+            for (int i = 1; i < length; i++)
+            {
+                Create($"Title{i}",$"Author{i}", $"Content{i}");    
+            }
+        }
     }
 }
