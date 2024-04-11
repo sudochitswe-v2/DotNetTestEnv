@@ -23,7 +23,7 @@ namespace CSDotNetTraining.WebApi.Controllers
         //    return Ok(result);
         //}
         [HttpGet("blogs")]
-        public IActionResult GetBlogs(int pageNo, int pageSize)
+        public IActionResult GetBlogs(int pageNo = 1, int pageSize = 10)
         {
 
             var list = _db.Blogs

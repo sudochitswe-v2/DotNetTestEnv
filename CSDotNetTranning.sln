@@ -13,6 +13,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CSDotNetTranning.MVCApp", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MissingHistoricalRecords.WebApi", "MissingHistoricalRecords.WebApi\MissingHistoricalRecords.WebApi.csproj", "{C24E7131-855D-4AF4-BB52-9DD33BDE2D8F}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CSDotNetTranning.Shared", "CSDotNetTranning.Shared\CSDotNetTranning.Shared.csproj", "{C0CB0C7C-74C7-454D-BEDC-7491D04393E6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CSDotNetTranning.MVCApp2", "CSDotNetTranning.MvcApp2\CSDotNetTranning.MVCApp2.csproj", "{0B6BE33D-93D4-436D-BCB3-4EF39377D761}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSDotNetTranning.MinimalApi", "CSDotNetTranning.MinimalApi\CSDotNetTranning.MinimalApi.csproj", "{7658F517-2C6C-43B3-87B7-A50E7FE9F711}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +45,18 @@ Global
 		{C24E7131-855D-4AF4-BB52-9DD33BDE2D8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C24E7131-855D-4AF4-BB52-9DD33BDE2D8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C24E7131-855D-4AF4-BB52-9DD33BDE2D8F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0CB0C7C-74C7-454D-BEDC-7491D04393E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0CB0C7C-74C7-454D-BEDC-7491D04393E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0CB0C7C-74C7-454D-BEDC-7491D04393E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0CB0C7C-74C7-454D-BEDC-7491D04393E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B6BE33D-93D4-436D-BCB3-4EF39377D761}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B6BE33D-93D4-436D-BCB3-4EF39377D761}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B6BE33D-93D4-436D-BCB3-4EF39377D761}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B6BE33D-93D4-436D-BCB3-4EF39377D761}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7658F517-2C6C-43B3-87B7-A50E7FE9F711}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7658F517-2C6C-43B3-87B7-A50E7FE9F711}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7658F517-2C6C-43B3-87B7-A50E7FE9F711}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7658F517-2C6C-43B3-87B7-A50E7FE9F711}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

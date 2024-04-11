@@ -6,6 +6,7 @@ namespace CSDotNetTranning.WebApi.EFCoreExamples
 {
     public class AppDbContext : DbContext
     {
+        
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             var sqlConnectionStringBuilder = new SqlConnectionStringBuilder()

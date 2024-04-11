@@ -1,4 +1,8 @@
 using CSDotNetTranning.MVCApp;
+using CSDotNetTranning.Shared;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,7 +11,14 @@ builder.Services.AddControllersWithViews().AddJsonOptions(opt =>
 {
     opt.JsonSerializerOptions.PropertyNamingPolicy = null;
 });
-builder.Services.AddSingleton<AppDbContext>();
+builder.Services.AddDbContext<AppDbContext>(opt =>
+{
+    opt.UseSqlServer(builder.Configuration.GetConnectionString("SqlConnectionString"));
+}, ServiceLifetime.Transient, ServiceLifetime.Transient);
+
+builder.Services.AddScoped(n => new AdoDotNetService(builder.Configuration.GetConnectionString("SqlConnectionString")!));
+builder.Services.AddScoped(n => new DapperService(builder.Configuration.GetConnectionString("SqlConnectionString")!));
+//builder.Services.AddSingleton<AppDbContext>();
 var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
